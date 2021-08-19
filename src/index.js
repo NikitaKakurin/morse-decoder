@@ -38,7 +38,18 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let MorseTableDecodedToBin ={};
+    let firstdigit = 0;
+    let result = '';
+    for(i in MORSE_TABLE){
+        MorseTableDecodedToBin[i.replace(/\./g, '10').replace(/-/g, '11').padStart(10,'0')] = MORSE_TABLE[i];
+    };
+    MorseTableDecodedToBin['**********'] = ' ';
+    while (firstdigit < expr.length){
+        result +=  MorseTableDecodedToBin[expr.slice(firstdigit, firstdigit + 10)]
+        firstdigit += 10;
+    };
+    return result;
 }
 
 module.exports = {
